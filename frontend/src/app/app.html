@@ -1,0 +1,84 @@
+<div class="dashboard-container">
+  <div class="predictor-card">
+
+    <div class="card-header">
+      <h2>Crop Pattern Prediction</h2>
+      <p>ML based crop pattern analysis and prediction</p>
+    </div>
+
+    <div class="input-group">
+      <label>Crop Name</label>
+      <input type="text" [(ngModel)]="userInput.crop">
+    </div>
+    
+
+    <div class="form-row">
+      <div class="input-group">
+        <label>Season</label>
+        <input type="text" [(ngModel)]="userInput.season">
+      </div>
+
+      <div class="input-group">
+        <label>Crop Year</label>
+        <input type="number" [(ngModel)]="userInput.crop_year">
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>State</label>
+      <input type="text" [(ngModel)]="userInput.state">
+    </div>
+
+    <div class="form-row">
+      <div class="input-group">
+        <label>Area (Hectares)</label>
+        <input type="number" [(ngModel)]="userInput.area">
+      </div>
+
+      <div class="input-group">
+        <label>Yield</label>
+        <input type="number" [(ngModel)]="userInput.yield">
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>Calculation Method</label>
+      <select [(ngModel)]="userInput.method">
+        <option value="mean">Mean</option>
+        <option value="median">Median</option>
+      </select>
+    </div>
+
+    <button class="predict-btn" (click)="makePrediction()">
+      Predict Pattern
+      <span class="btn-arrow">→</span>
+    </button>
+
+    <div *ngIf="apiResult" class="result-panel animate-fade-in">
+
+      <h3>Prediction Result</h3>
+
+      <div class="score-circle">
+        {{ apiResult.cropping_pattern_score }}%
+      </div>
+
+      <div class="result-grid">
+        <div class="result-item">
+          <span class="result-label">Score</span>
+          <span class="result-value">
+            {{ apiResult.cropping_pattern_score }}
+          </span>
+        </div>
+
+        <div class="result-item">
+          <span class="result-label">Status</span>
+          <span class="result-value status-badge">
+            {{ apiResult.status }}
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,327 @@
+:host {
+  --primary: #0f3d91;
+  --secondary: #234fb5;
+  --accent: #5a4fcf;
+  --light-accent: #7b68ee;
+
+  --background: #f4f7fc;
+  --card-bg: #ffffff;
+
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+
+  --success: #0ea5e9;
+  --border: #dbe4f0;
+
+  --shadow: 0 12px 30px rgba(15, 61, 145, 0.12);
+
+  display: block;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dashboard-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f3d91 0%,
+      #234fb5 50%,
+      #5a4fcf 100%
+    );
+}
+
+
+.predictor-card {
+  width: 100%;
+  max-width: 720px;
+
+  background: var(--card-bg);
+
+  border-radius: 24px;
+
+  padding: 40px;
+
+  box-shadow: var(--shadow);
+
+  border-top: 6px solid var(--primary);
+
+  animation: fadeIn 0.5s ease;
+}
+
+
+.card-header {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.header-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.card-header h2 {
+  color: var(--primary);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.card-header p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+
+label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+input,
+select {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 14px 16px;
+
+  border: 2px solid var(--border);
+
+  border-radius: 12px;
+
+  font-size: 15px;
+
+  color: var(--text-dark);
+
+  background: white;
+
+  transition: all 0.3s ease;
+}
+
+input::placeholder {
+  color: #94a3b8;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+
+  border-color: var(--secondary);
+
+  box-shadow:
+    0 0 0 4px rgba(35, 79, 181, 0.15);
+
+  transform: translateY(-1px);
+}
+
+.predict-btn {
+  width: 100%;
+
+  padding: 16px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #0f3d91,
+      #234fb5
+    );
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  margin-top: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  transition: all 0.3s ease;
+}
+
+.predict-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(15, 61, 145, 0.25);
+}
+
+.predict-btn:active {
+  transform: scale(0.98);
+}
+
+.btn-arrow {
+  transition: transform 0.3s ease;
+}
+
+.predict-btn:hover .btn-arrow {
+  transform: translateX(5px);
+}
+
+.result-panel {
+  margin-top: 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef4ff,
+      #f4f2ff
+    );
+
+  border-left: 5px solid var(--accent);
+
+  padding: 25px;
+
+  border-radius: 16px;
+
+  animation: fadeIn 0.4s ease;
+}
+
+.result-panel h3 {
+  margin-top: 0;
+  text-align: center;
+  color: var(--primary);
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.score-circle {
+  width: 130px;
+  height: 130px;
+
+  margin: 0 auto 25px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f3d91,
+      #5a4fcf
+    );
+
+  color: white;
+
+  font-size: 2rem;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 10px 25px rgba(35, 79, 181, 0.25);
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.result-item {
+  background: white;
+
+  padding: 16px;
+
+  border-radius: 12px;
+
+  text-align: center;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.result-label {
+  display: block;
+
+  color: var(--text-light);
+
+  font-size: 0.8rem;
+
+  text-transform: uppercase;
+
+  margin-bottom: 6px;
+
+  font-weight: 600;
+}
+
+.result-value {
+  color: var(--text-dark);
+
+  font-size: 1.1rem;
+
+  font-weight: 700;
+}
+
+.status-badge {
+  color: var(--accent);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .predictor-card {
+    padding: 25px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .score-circle {
+    width: 100px;
+    height: 100px;
+    font-size: 1.5rem;
+  }
+
+  .card-header h2 {
+    font-size: 1.6rem;
+  }
+}
