@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import joblib
 
-dataset = pd.read_csv("crop-datasets.csv")
+dataset = pd.read_csv("C:/Users/jenifer/Downloads/crop-datasets.csv")
 dataset.columns = dataset.columns.str.strip().str.lower()
 
 app = FastAPI(title="Crop Pattern API")
@@ -21,6 +21,12 @@ app.add_middleware(
 model = joblib.load("crop_pattern_model.pkl")
 training_cols = joblib.load("training_cols.pkl")
 
+@app.get("/")
+def home():
+    return {
+        "message": "Crop Pattern Prediction API Running Successfully!"
+    }
+    
 class CropRequest(BaseModel):
     crop: str
     crop_year: int
@@ -41,30 +47,34 @@ def predict(data: CropRequest):
         return {"error": "Invalid method. Please send 'mean' or 'median'."}
     
     matching_records = dataset[
-    (dataset['crop'].str.strip().str.lower() == data.crop.lower().strip()) &
-    (dataset['season'].str.strip().str.lower() == data.season.lower().strip()) &
     (dataset['state'].str.strip().str.lower() == data.state.lower().strip())
 ]
     if matching_records.empty:
         return {
-        "error": "No matching crop-season-state combination found in dataset.",
-        "crop": data.crop,
-        "season": data.season,
+        "error": "No matching state found in dataset.",
         "state": data.state
     }
     
-    baseline_yield = round(
-    matching_records['yield'].mean(), 2
-)
+    if selected_method == "mean":
+        baseline_yield = round(
+        matching_records['yield'].mean(), 2
+    )
+    else:
+        baseline_yield = round(
+        matching_records['yield'].median(), 2
+    )
+        
+    adjusted_yield = (
+    baseline_yield + data.yield_val
+    ) / 2
 
-    record_count = len(matching_records)
     new_data = pd.DataFrame({
         "crop": [data.crop.lower().strip()],
         "crop_year": [data.crop_year],
         "season": [data.season.lower().strip()],
         "state": [data.state.lower().strip()],
         "area": [data.area],
-        "yield": [data.yield_val],
+        "yield": [adjusted_yield],
         "method": [data.method.lower().strip()]
     })
     
@@ -89,16 +99,6 @@ def predict(data: CropRequest):
         
     return {
     "cropping_pattern_score": round(score, 2),
-    "dataset_match": True,
-    "method_used": selected_method
+    "status": status
     }
 
-    
-@app.get("/")
-def home():
-    return {
-        "message": "Crop Pattern Prediction API Running Successfully!"
-    }
-    
-    app = WsgiToAsgi(flask_app)
-    
