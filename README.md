@@ -125,6 +125,7 @@ crop-pattern/
 │
 ├── app.py
 ├── train.py
+├── predict.py
 ├── requirements.txt
 ├── Dockerfile
 ├── crop_pattern_model.pkl
@@ -211,7 +212,8 @@ Random Forest Regressor
 
 ```python
 RandomForestRegressor(
-    n_estimators=100,
+    n_estimators=20,
+    max_depth=10,
     random_state=42
 )
 ```
