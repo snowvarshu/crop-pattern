@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import joblib
 
-dataset = pd.read_csv("C:/Users/jenifer/Downloads/crop-datasets.csv")
+dataset = pd.read_csv("crop-datasets.csv")
 dataset.columns = dataset.columns.str.strip().str.lower()
 
 app = FastAPI(title="Crop Pattern API")
